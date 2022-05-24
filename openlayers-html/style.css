@@ -1,0 +1,9 @@
+.map {
+    width: 100%;
+    height: 800px;
+}
+.custom-mouse-position {
+    float: right;
+    right: 0;
+    margin-right: 10px;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Freehand Drawing</title>
+    <script src="./lib/6.14.1/ol.js"></script>
+    <link rel="stylesheet" href="./lib/6.14.1/ol.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./lib/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./lib/datatables.min.css" />
+    <script type="text/javascript" src="./lib/datatables.min.js"></script>
+    <script type="text/javascript" src="./lib/jquery.blockUI.js"></script>
+    <link rel="stylesheet" type="text/css" href="./lib/sb-admin-2.min.css" />
+    <script type="text/javascript" src="./lib/bootstrap-4.6.1-dist/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-5">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">MAP</h6>
+                    </div>
+                    <div class="card-body">
+                        <div id="map" class="map"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-7">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Result</h6>
+                    </div>
+                    <div class="card-body">
+                        <button type="button" class="btn btn-primary" onclick="addInteractions()">Draw Polygon</button>
+                        <button type="button" class="btn btn-secondary" onclick="removeLayer()">Clear</button>
+                        <div class="table-responsive my-3">
+                            <table id="myTable" width="100%" height="650px">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>soil type</th>
+                                        <th>topsoil</th>
+                                        <th>upper topsoil</th>
+                                        <th>lower topsoil</th>
+                                        <th>lower soil</th>
+                                        <th>upper lower soil</th>
+                                        <th>lower lower soil</th>
+                                        <th>suggest plants</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').dataTable({
+                "responsive": true,
+                "bDestroy": true
+            });
+        });
+    </script>
+    <script src="./main.js"></script>
+</body>
+
+</html>
