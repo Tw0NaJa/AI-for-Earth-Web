@@ -377,6 +377,10 @@ function call_calculator() {
             $('#myTable2').dataTable({
                 "responsive": true,
                 "bDestroy": true,
+                "language": {
+                    "decimal": '.',
+                    "thousands": ',',
+                },
                 data: dataSet,
                 "columns": [
                     {
@@ -398,7 +402,7 @@ function call_calculator() {
                     {
                         "data": "total",
                         render: function (data, type, row, meta) {
-                            var name = row.total;
+                            var name = numberWithCommas(row.total);
                             if (!name) {
                                 name = "-";
                             }
@@ -408,7 +412,7 @@ function call_calculator() {
                     {
                         "data": "carbon_credit",
                         render: function (data, type, row, meta) {
-                            var name = row.carbon_credit;
+                            var name = numberWithCommas(row.carbon_credit);
                             if (!name) {
                                 name = "-";
                             }
@@ -421,6 +425,10 @@ function call_calculator() {
             });
         }
     });
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function checkPlantName() {
