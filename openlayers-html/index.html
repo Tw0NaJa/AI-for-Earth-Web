@@ -13,6 +13,8 @@
     <script type="text/javascript" src="./lib/jquery.blockUI.js"></script>
     <link rel="stylesheet" type="text/css" href="./lib/sb-admin-2.min.css" />
     <script type="text/javascript" src="./lib/bootstrap-4.6.1-dist/js/bootstrap.min.js"></script>
+    <script src="./lib/sweetalert2/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="./lib/sweetalert2/sweetalert2.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 
@@ -33,32 +35,74 @@
 
             </div>
             <div class="col-lg-6">
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Result</h6>
+                <div class="card text-center">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#first" data-toggle="tab">Result Polygon</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#second" data-toggle="tab">Result Carbon Credit</a>
+                            </li>
+                        </ul>
                     </div>
                     <div class="card-body">
-                        <button type="button" class="btn btn-primary" onclick="addInteractions()">Draw Polygon</button>
-                        <button type="button" class="btn btn-secondary" onclick="removeLayer()">Clear</button>
-                        <div class="table-responsive my-3">
-                            <table id="myTable" width="100%" height="650px">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Soil Code</th>
-                                        <th>Topsoil</th>
-                                        <th>Upper Topsoil</th>
-                                        <th>Lower Topsoil</th>
-                                        <th>Lower Soil</th>
-                                        <th>Upper Lower Soil</th>
-                                        <th>Lower Lower Soil</th>
-                                        <th>Suggest Plants</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
+                        <div class="tab-content">
+                            <div id="first" class="tab-pane active">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Select Region</label>
+                                    <select class="form-control" id="region" onchange="selectRegion()">
+                                        <option value="0" disabled selected>Please Select</option>
+                                        <option value="1">North</option>
+                                        <option value="2">Northeast</option>
+                                        <option value="3">Western</option>
+                                        <option value="4">Central</option>
+                                        <option value="5">Eastern</option>
+                                        <option value="6">South</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-primary" onclick="addInteractions()">Draw
+                                    Polygon</button>
+                                <button type="button" class="btn btn-primary" onclick="call_calculator()">Calculate
+                                    Carbon Credit</button>
+                                <button type="button" class="btn btn-secondary" onclick="removeLayer()">Clear</button>
+                                <div class="table-responsive my-3">
+                                    <table id="myTable" width="100%" height="650px">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>SoilGroup</th>
+                                                <th>Fertility</th>
+                                                <th>Texture</th>
+                                                <th>SoilSeries</th>
+                                                <th>pH_top</th>
+                                                <th>PlantSuit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div id="second" class="tab-pane">
+                                <div class="table-responsive my-3">
+                                    <table id="myTable2" width="100%" height="650px">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Plant Name</th>
+                                                <th>Total/Plant</th>
+                                                <th>Carbon Credit/Year</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -68,6 +112,11 @@
     <script>
         $(document).ready(function () {
             $('#myTable').dataTable({
+                "responsive": true,
+                "bDestroy": true
+            });
+
+            $('#myTable2').dataTable({
                 "responsive": true,
                 "bDestroy": true
             });
